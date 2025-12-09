@@ -1,0 +1,53 @@
+<!-- dashboard.html -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>AI Time Tracker — Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="firebase.js"></script>
+  <!-- Chart.js for charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="card center-card">
+    <div class="header">
+      <div>
+        <h2>Analytics</h2>
+        <div class="small">Date: <span id="dateLabel"></span></div>
+      </div>
+      <div class="nav">
+        <button id="backBtn" class="btn outline">Back</button>
+      </div>
+    </div>
+
+    <div id="contentArea">
+      <!-- if no data show this -->
+      <div id="noData" class="no-data" style="display:none;">
+        <div style="font-size:48px">📭</div>
+        <h3>No data available</h3>
+        <p class="small">Start logging your day now. <a href="home.html">Add activities</a></p>
+      </div>
+
+      <!-- when data present show stats -->
+      <div id="statsArea" style="display:none;">
+        <p class="small">Total minutes: <strong id="totalMinutes">0</strong> • Activities: <strong id="activityCount">0</strong></p>
+
+        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+          <canvas id="pieChart" style="width:300px; height:220px;"></canvas>
+          <canvas id="barChart" style="width:300px; height:220px;"></canvas>
+        </div>
+
+        <div style="margin-top:16px">
+          <button id="aiAnalyzeBtn" class="btn">AI Analyse My Day</button>
+        </div>
+
+        <div id="aiResult" style="margin-top:12px; padding:12px; background:#f8fafc; display:none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="dashboard.js"></script>
+  <script type="module" src="ai.js"></script>
+</body>
+</html>
