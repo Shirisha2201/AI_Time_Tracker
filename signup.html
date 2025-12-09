@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="card center-card">
+        <h2>Create Account</h2>
+        <input id="signupEmail" placeholder="Email"/>
+        <input id="signupPass" placeholder="Password" type="password"/>
+
+        <button id="signupBtn" class="btn">Create account</button>
+        <p>Already have an account? <a href="index.html">Login</a></p>
+    </div>
+    <script type="module">
+import {
+    auth,
+    createUserWithEmailAndPassword,
+    onAuthStateChanged
+} from "./firebase.js";
+
+signupBtn.addEventListener("click", async () => {
+    const email = signupEmail.value.trim();
+    const pass = signupPass.value.trim();
+
+    try {
+        await createUserWithEmailAndPassword(auth, email, pass);
+        window.location = "home.html";
+    } catch (e) {
+        alert("Signup failed: " + e.message);
+    }
+});
+
+onAuthStateChanged(auth, user => {
+    if (user) window.location = "home.html";
+});
+</script>
+
+</body>
+</html>
