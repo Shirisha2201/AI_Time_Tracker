@@ -1,0 +1,56 @@
+<!-- home.html -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>AI Time Tracker — Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="firebase.js"></script>
+</head>
+<body>
+  <div class="card center-card">
+    <div class="header">
+      <div>
+        <h2>Log Activities</h2>
+        <div class="small">Select date, add activities in minutes</div>
+      </div>
+      <div class="nav">
+        <button id="dashboardBtn" class="btn outline">Open Dashboard</button>
+        <button id="logoutBtn" class="btn outline">Logout</button>
+      </div>
+    </div>
+
+    <div class="date-row">
+      <label class="small">Date:</label>
+      <input id="dateInput" type="date" />
+    </div>
+
+    <div style="margin-top:12px">
+      <input id="activityTitle" placeholder="Activity title (e.g., Study)" />
+      <input id="activityCategory" placeholder="Category (Work / Sleep / Study / Exercise / Entertainment)" />
+      <input id="activityMinutes" type="number" placeholder="Duration in minutes" />
+      <div style="display:flex; gap:8px; margin-top:8px;">
+        <button id="addActivityBtn" class="btn">Add activity</button>
+        <button id="analyseBtn" class="btn" disabled>Analyse</button>
+      </div>
+
+      <p class="note">Remaining minutes for chosen date: <span id="remainingSpan">1440</span></p>
+
+      <div class="list" id="activitiesList"></div>
+    </div>
+  </div>
+
+ <script type="module">
+import { auth, signOut, onAuthStateChanged } from "./firebase.js";
+
+onAuthStateChanged(auth, user => {
+    if (!user) window.location = "index.html";
+});
+
+logoutBtn.addEventListener("click", () => signOut(auth));
+</script>
+
+<script type="module" src="script.js"></script>
+
+</body>
+</html>
